@@ -1,9 +1,12 @@
 package potaskun.enot.worktodb;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -60,5 +63,27 @@ public class MainActivity extends AppCompatActivity {
                 );
         header.setText("Найдено элементов: " + String.valueOf(userCursor.getCount()));
         userList.setAdapter(userAdapter); //отправляем собраный адаптер в список
+
+        userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
+    }
+    // по нажатию на кнопку запускаем UserActivity для добавления данных
+    public void add(View view) {
+        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        // Закрываем подключение и курсор
+        db.close();
+        userCursor.close();
     }
 }
