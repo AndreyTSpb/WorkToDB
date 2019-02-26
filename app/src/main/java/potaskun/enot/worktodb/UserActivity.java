@@ -14,6 +14,7 @@ public class UserActivity extends AppCompatActivity {
 
     EditText nameBox;
     EditText yearBox;
+    EditText phoneBox;
     Button delButton;
     Button saveButton;
 
@@ -29,6 +30,7 @@ public class UserActivity extends AppCompatActivity {
 
         nameBox = findViewById(R.id.name);
         yearBox = findViewById(R.id.year);
+        phoneBox = findViewById(R.id.phone);
         delButton = findViewById(R.id.deleteButt);
         saveButton = findViewById(R.id.saveButton);
 
@@ -48,6 +50,7 @@ public class UserActivity extends AppCompatActivity {
             userCursor.moveToFirst();
             nameBox.setText(userCursor.getString(1));
             yearBox.setText(String.valueOf(userCursor.getString(2)));
+            phoneBox.setText(String.valueOf(userCursor.getString(3)));
             userCursor.close();
         }else{
             // скрываем кнопку удаления
@@ -60,6 +63,7 @@ public class UserActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();//Первый параметр метода - это ключ, а второй - значение
         cv.put(DatabaseHelper.COLUMN_NAME, nameBox.getText().toString());
         cv.put(DatabaseHelper.COLUMN_YEAR, Integer.parseInt(yearBox.getText().toString()));
+        cv.put(DatabaseHelper.COLUMN_PHONE, Long.parseLong(phoneBox.getText().toString()));
         if(userId > 0 ){
             //передается название таблицы, объект ContentValues и критерий, по которому происходит обновление (в данном случае столбец id)
             db.update(DatabaseHelper.TABLE, cv, DatabaseHelper.COLUMN_ID + "=" + String.valueOf(userId), null);

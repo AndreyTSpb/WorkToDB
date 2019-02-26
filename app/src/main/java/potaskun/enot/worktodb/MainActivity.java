@@ -46,18 +46,19 @@ public class MainActivity extends AppCompatActivity {
         userCursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.TABLE, null);
         // определяем, какие столбцы из курсора будут выводиться в ListView
         String[] headers = new String[] {
-                DatabaseHelper.COLUMN_NAME, DatabaseHelper.COLUMN_YEAR
+                DatabaseHelper.COLUMN_NAME, DatabaseHelper.COLUMN_YEAR, DatabaseHelper.COLUMN_PHONE
         };
         // создаем адаптер, передаем в него курсор
         userAdapter = new SimpleCursorAdapter(
                 this, //Первым параметром выступает контекст, с которым ассоциируется адаптер
-                android.R.layout.two_line_list_item,//ресурс разметки интерфейса, который будет использоваться для отображения результатов выборки
+                R.layout.tree_line_list_item,//ресурс разметки интерфейса, который будет использоваться для отображения результатов выборки
                 userCursor,//курсор
                 headers, // список столбцов из выборки, которые будут отображаться в разметке интерфейса
                 new int[]{
                         //элементы внутри ресурса разметки, которые будут отображать значения столбцов из четвертого параметра
-                            android.R.id.text1,
-                            android.R.id.text2
+                            R.id.text1,
+                            R.id.text2,
+                            R.id.text3
                     },
                 0 //флаги, задающие поведения адаптера
                 );

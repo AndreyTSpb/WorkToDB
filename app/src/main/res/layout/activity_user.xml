@@ -16,6 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Year"/>
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Phone"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
